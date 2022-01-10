@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/startBmi">
+
+
+    <fragment
+        android:id="@+id/startBmi"
+        android:name="com.example.kotlinbmicalculator.fragment.StartBmi"
+        android:label="StartBmi" >
+        <action
+            android:id="@+id/action_startBmi_to_resultBmi"
+            app:popUpToInclusive="true"
+            app:destination="@id/resultBmi" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultBmi"
+        android:name="com.example.kotlinbmicalculator.fragment.ResultBmi"
+        android:label="ResultBmi" >
+        <action
+            android:id="@+id/action_resultBmi_to_startBmi"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/startBmi"
+            app:destination="@id/startBmi" />
+    </fragment>
+
+</navigation>
