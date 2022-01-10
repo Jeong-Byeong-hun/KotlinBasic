@@ -13,4 +13,8 @@ BMI 계산기
 
 사용한 내용 : activity가 아닌 fragment로 구성 navigation을 이용한 페이지 전환 및 인자 주고 받기
 
+popUpTo는 BackStack에서 어디까지 이동할 것인지 결정하는 속성
+
+popUpToInclusive는 popUpTo로 지정한 fragment까지 pop 시킬 것인지 정하는 속성
+
 ==========================================================
