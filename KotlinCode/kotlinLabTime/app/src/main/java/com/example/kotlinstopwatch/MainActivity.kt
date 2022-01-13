@@ -1,7 +1,6 @@
 package com.example.kotlinstopwatch
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -41,14 +40,25 @@ class MainActivity : AppCompatActivity() {
         rvLabTime = findViewById(R.id.rvLabTime)
         fabLab = findViewById(R.id.fabLab)
         fabLab.setOnClickListener {
-            val labTime =
-                tv_min.text.toString() + ":" + tv_sec.text.toString() + ":" + tv_millisec.text.toString()
-            val labTimeVO: LabTimeVO = LabTimeVO(labTimeList.size + 1, labTime)
+            if (isRunning) {
+                val labTime =
+                    tv_min.text.toString() + ":" + tv_sec.text.toString() + ":" + tv_millisec.text.toString()
+                val labTimeVO: LabTimeVO = LabTimeVO(labTimeList.size + 1, labTime)
 
-            labTimeList.add(labTimeVO)
-            Log.d("TAG", "onBind: " + labTimeVO.toString())
+                labTimeList.add(0, labTimeVO)
+//            Log.d("TAG", "onBind: " + labTimeVO.toString())
 
-            labTimeAdapter.setLabTimeList(labTimeList)
+                labTimeAdapter.setLabTimeList(labTimeList)
+            } else {
+                time = 0
+                tv_min.text = String.format("%02d", 0)
+                tv_sec.text = String.format("%02d", 0)
+                tv_millisec.text = String.format("%02d", 0)
+
+                labTimeList.clear()
+                labTimeAdapter.setLabTimeList(labTimeList)
+
+            }
         }
         fabStart = findViewById(R.id.fabStart)
         fabStart.setOnClickListener {
@@ -56,9 +66,10 @@ class MainActivity : AppCompatActivity() {
             if (isRunning) {
                 fabLab.isEnabled = true
                 start()
+                fabLab.text = "랩"
             } else {
-                fabLab.isEnabled = false
                 pause()
+                fabLab.text = "재설정"
             }
         }
     }
