@@ -18,3 +18,25 @@ popUpTo는 BackStack에서 어디까지 이동할 것인지 결정하는 속성
 popUpToInclusive는 popUpTo로 지정한 fragment까지 pop 시킬 것인지 정하는 속성
 
 ==========================================================
+
+LabTime
+
+기존 책의 내용 : Scrollview를 이용한 랩 작성
+
+사용한 내용 : Recyclerview를 이용
+
+Recyclerview의 구성 요소
+
+Adpater
+
+onCreateViewHolder
+
+onBindViewHolder
+
+getItemCount
+
+viewholder
+
+valueObject 
+
+==========================================================
