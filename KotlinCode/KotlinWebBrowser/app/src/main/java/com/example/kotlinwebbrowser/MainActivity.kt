@@ -47,8 +47,29 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.context, menu)
     }
 
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_share -> {
+                var intent = Intent(Intent.ACTION_SEND)
+                intent.setType("text/plain")
+
+                val msg = (wv_view.url).toString()
+                intent.putExtra(Intent.EXTRA_TEXT, msg)
+                val shareIntent = Intent.createChooser(intent, "share")
+                startActivity(shareIntent)
+
+            }
+
+            R.id.action_browser -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(wv_view.url)))
+
+            }
+        }
+        return super.onContextItemSelected(item)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.action_google, R.id.action_home -> {
                 wv_view.loadUrl(GOOGLE_URL)
                 et_adress.setText(GOOGLE_URL)
