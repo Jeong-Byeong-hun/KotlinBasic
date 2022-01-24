@@ -70,3 +70,11 @@ shouldOverrideUrlLoading
 addJavascriptInterface
 
 ==========================================================
+
+TiltSensor
+
+캔버스와 커스텀뷰의 기초
+
+SensorManager를 이용한 센서 이용
+
+==========================================================
