@@ -2,6 +2,7 @@ package com.example.stickyheaderrecyclervview;
 
 import android.graphics.Canvas;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,9 +55,17 @@ public class StickyHeaderItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void drawHeader(Canvas c, View currentHeader) {
+        c.save();
+        c.translate(0f, 0f);
+        currentHeader.draw(c);
+        c.restore();
     }
 
     private void moveHeader(Canvas c, View currentHeader, View childInContact) {
+        c.save();
+        c.translate(0f,childInContact.getTop() - currentHeader.getHeight());
+        currentHeader.draw(c);
+        c.restore();
     }
 
     private View getChildContact(RecyclerView parent, int contactPoint) {
@@ -78,7 +87,15 @@ public class StickyHeaderItemDecoration extends RecyclerView.ItemDecoration {
      * Measures the header view to make sure its size is greater than 0 and will be drawn
      * https://yoda.entelect.co.za/view/9627/how-to-android-recyclerview-item-decorations
      */
-    private void fixLayoutSize(RecyclerView parent, View currentHeader, int measuredHeight) {
+    private void fixLayoutSize (ViewGroup parent, View view, int height) {
+        int widthSpec = View.MeasureSpec.makeMeasureSpec(parent.getWidth(), View.MeasureSpec.EXACTLY);
+        int heightSpec = View.MeasureSpec.makeMeasureSpec(parent.getHeight(), View.MeasureSpec.EXACTLY);
+
+        int childWidth = ViewGroup.getChildMeasureSpec(widthSpec, parent.getPaddingLeft() + parent.getPaddingRight(), view.getLayoutParams().width);
+        int childHeight = ViewGroup.getChildMeasureSpec(heightSpec, parent.getPaddingTop() + parent.getPaddingBottom(), height);
+
+        view.measure(childWidth, childHeight);
+        view.layout(0,0,view.getMeasuredWidth(), view.getMeasuredHeight());
     }
 
 
